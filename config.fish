@@ -1,4 +1,4 @@
-set PATH /usr/local/bin /usr/sbin $PATH
+set PATH /usr/local/bin /usr/sbin $HOME/.cargo/bin $PATH
 
 function parse_git_branch 
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ ->\ \1/'
@@ -20,6 +20,10 @@ function fish_user_key_bindings
     fish_vi_mode
     bind -M insert \cf accept-autosuggestion
     bind \cf accept-autosuggestion
+    for mode in insert default visual
+      bind -M $mode \ck 'history --merge ; up-or-search'
+      bind -M $mode \cj 'history --merge ; down-or-search' 
+    end
 end
 
 function fish_mode_prompt
@@ -33,7 +37,7 @@ end
 function fish_greeting
 end
 
-set EDITOR 'vim' 
+set -U EDITOR 'vim' 
 
 alias onport="ps aux | grep"
 alias server="mix phoenix.server"
