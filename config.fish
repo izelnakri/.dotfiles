@@ -13,6 +13,18 @@ function prompt_pwd --description 'Print the current working directory, NOT shor
 
 end
 
+# bind  ^k history-search-forward 
+# bind  ^j history-search-backward  
+
+function fish_user_key_bindings
+    fish_vi_mode
+    bind -M insert \cf accept-autosuggestion
+    bind \cf accept-autosuggestion
+end
+
+function fish_mode_prompt
+end
+
 function fish_prompt
   printf '%s%s%s ' (set_color -o green) (whoami) (set_color -o cyan) (prompt_pwd) \
     (set_color -o yellow) (parse_git_branch)
