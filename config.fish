@@ -15,7 +15,6 @@ end
 
 # bind  ^k history-search-forward 
 # bind  ^j history-search-backward  
-
 function fish_user_key_bindings
     fish_vi_mode
     bind -M insert \cf accept-autosuggestion
