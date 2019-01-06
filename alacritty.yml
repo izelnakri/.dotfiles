@@ -2,11 +2,11 @@
 #
 #
 #
+#
 
 # Any items in the `env` entry below will be added as environment variables. Some entries may override variables
 # set by alacritty itself.
-env:
-  # TERM variable
+env: # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
@@ -24,7 +24,6 @@ window:
     lines: 24
 
   # Window padding (changes require restart)
-  #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
@@ -68,8 +67,7 @@ scrolling:
   #
   # The `faux_multiplier` setting controls the number of lines the terminal
   # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.
-  #
+  # to allow mouse scrolling for applications like `man`.  
   # Specifying `0` will disable faux scrolling.
   faux_multiplier: 3
 
@@ -166,8 +164,9 @@ colors:
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
   cursor:
-  #  text: '0x000000'
-    cursor: '0x838586'
+    text: '0xE6E1C4'
+    cursor: '0x993F0B'
+    # cursor: '0xB04100'
 
   # Normal colors
   normal:
@@ -591,12 +590,14 @@ key_bindings:
   - { key: Key9, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t", "9"] } }
   - { key: LBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t:-"] } }
   - { key: RBracket, mods: Command|Shift, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t:+"] } }
-  - { key: A, mods: Command, chars: "\xE2\x8C\x98a" }
+  - { key: A, mods: Command, chars: "\xe2\x8c\x98a" }
   - { key: H, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-L"] } }
   - { key: J, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-D"] } }
   - { key: K, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-U"] } }
   - { key: L, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-pane", "-R"] } }
   - { key: Y, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["setw", "synchronize-panes"] } }
+  - { key: Z, mods: Command, chars: "\x01z" }
+  - { key: LBracket, mods: Command, chars: "\x01[" }
   - { key: D,     mods: Command,       chars: "\x06\x76" } 
   - { key: D,     mods: Command|Shift, chars: "\x06\x73" }
   - { key: W,     mods: Command,       chars: "\x06\x78" }

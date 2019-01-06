@@ -20,8 +20,8 @@ function fish_user_key_bindings
     bind -M insert \cf accept-autosuggestion
     bind \cf accept-autosuggestion
     for mode in insert default visual
-      bind -M $mode \ck 'history --merge ; up-or-search'
-      bind -M $mode \cj 'history --merge ; down-or-search' 
+      bind -M $mode \cp 'up-or-search'
+      bind -M $mode \cn 'down-or-search' 
     end
 end
 
