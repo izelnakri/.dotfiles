@@ -49,10 +49,10 @@ window:
   #     - none: Neither borders nor title bar
   #     - buttonless: Title bar, transparent background and title bar buttons
   #     - transparent: Title bar, transparent background, but no title bar buttons
-  # decorations: transparent 
+  # decorations: transparent
 
   # When true, alacritty starts maximized.
-  start_maximized: true 
+  start_maximized: true
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -67,12 +67,12 @@ scrolling:
   #
   # The `faux_multiplier` setting controls the number of lines the terminal
   # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.  
+  # to allow mouse scrolling for applications like `man`.
   # Specifying `0` will disable faux scrolling.
   faux_multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: true 
+  auto_scroll: true
 
 # Spaces per Tab (changes require restart)
 #
@@ -89,13 +89,13 @@ font:
   normal:
     family: MesloLGLDZ Nerd Font
     # The `style` can be specified to pick a specific face.
-    # style: Bold 
+    # style: Bold
 
   # Bold font face
   bold:
     family: MesloLGLDZ Nerd Font
     # The `style` can be specified to pick a specific face.
-    # style: Bold 
+    # style: Bold
 
   # Italic font face
   italic:
@@ -139,7 +139,7 @@ font:
 render_timer: false
 
 # Keep the log file after quitting Alacritty.
-persistent_logging: true 
+persistent_logging: true
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -311,7 +311,7 @@ live_config_reload: true
 # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
 # Entries in `shell.args` are passed unmodified as arguments to the shell.
 shell:
-  program: /usr/local/bin/fish 
+  program: /usr/local/bin/fish
   args:
     - --login
 
@@ -438,11 +438,11 @@ key_bindings:
   - { key: Down,     mods: Control, chars: "\x1b[1;5B"                   }
   - { key: Down,     mods: Alt,     chars: "\x1b[1;3B"                   }
   - { key: Down,                    chars: "\x1b[B",   mode: ~AppCursor  }
-  - { key: Down,                    chars: "\x1bOB",   mode: AppCursor   } 
-  - { key: F1,                      chars: "\x1bOP"                      } 
+  - { key: Down,                    chars: "\x1bOB",   mode: AppCursor   }
+  - { key: F1,                      chars: "\x1bOP"                      }
   - { key: F2,                      chars: "\x1bOQ"                      }
-  - { key: F3,                      chars: "\x1bOR"                      } 
-  - { key: F4,                      chars: "\x1bOS"                      } 
+  - { key: F3,                      chars: "\x1bOR"                      }
+  - { key: F4,                      chars: "\x1bOS"                      }
   - { key: F5,                      chars: "\x1b[15~"                    }
   - { key: F6,                      chars: "\x1b[17~"                    }
   - { key: F7,                      chars: "\x1b[18~"                    }
@@ -598,7 +598,7 @@ key_bindings:
   - { key: Y, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["setw", "synchronize-panes"] } }
   - { key: Z, mods: Command, chars: "\x01z" }
   - { key: LBracket, mods: Command, chars: "\x01[" }
-  - { key: D,     mods: Command,       chars: "\x06\x76" } 
+  - { key: D,     mods: Command,       chars: "\x06\x76" }
   - { key: D,     mods: Command|Shift, chars: "\x06\x73" }
   - { key: W,     mods: Command,       chars: "\x06\x78" }
   - { key: T,     mods: Command,       chars: "\x06\x63" }
