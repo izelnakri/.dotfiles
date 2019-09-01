@@ -1,6 +1,8 @@
 set NOTION_HOME $HOME/.notion
-set PATH /usr/local/bin /usr/sbin $HOME/.cargo/bin $HOME/.yarn/bin $HOME/.config/yarn/global/node_modules/.bin $HOME/.deno/bin $NOTION_HOME/bin $PATH
+set PATH $HOME/.rbenv/shims $HOME/Library/Python/2.7/bin $HOME/.cargo/bin $HOME/.yarn/bin $HOME/.config/yarn/global/node_modules/.bin $HOME/.deno/bin $NOTION_HOME/bin /usr/local/bin /usr/sbin $PATH
 set EDITOR nvim
+
+set LC_ALL en_US.UTF-8
 
 function parse_git_branch
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ ->\ \1/'
@@ -43,6 +45,18 @@ set -U EDITOR 'vim'
 alias onport="ps aux | grep"
 alias server="mix phoenix.server"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias k="kubectl"
+alias kube="kubectl"
+
+# As in "delpod defualt"
+# As in "delpod <namespace>"
+function delpod
+  kubectl delete po --all -n $argv
+end
+
+function fuck
+  kubectl delete all --all -n $argv
+end
 
 set HISTTIMEFORMAT "%d/%m/%y %T "
 
@@ -51,9 +65,6 @@ set POSTGRES_PASSWORD "postgres"
 set POSTGRES_HOST "localhost"
 
 alias checkrepo="git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
-
-set TF_VAR_scaleway_organization "f553408d-9333-4aaf-b1c3-e06fcca544be"
-set TF_VAR_scaleway_token "b7f0ce29-fbb4-4851-aeeb-1f49483975d7"
 
 alias terminate="lsof -ti:4200 | xargs kill"
 
@@ -79,12 +90,21 @@ set PGHOST localhost
 # fi
 
 if [ -z "$TMUX" ]
-    tmux -u attach
+  tmux -u attach
 end
 
 alias proxy-server="ember serve --proxy http://localhost:3000"
 set -g fish_user_paths "/usr/local/opt/postgresql@10/bin" $fish_user_paths
 
-set -gx NOTION_HOME "$HOME/.notion"
-test -s "$NOTION_HOME/load.fish"; and source "$NOTION_HOME/load.fish"
+status --is-interactive; and source (rbenv init -|psub)
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/izelnakri/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/izelnakri/Downloads/google-cloud-sdk/path.fish.inc'; end
+
+set -gx VOLTA_HOME "$HOME/.volta"
+test -s "$VOLTA_HOME/load.fish"; and source "$VOLTA_HOME/load.fish"
+
+string match -r ".volta" "$PATH" > /dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+
+bass 'export LANG=en_US.UTF-8'

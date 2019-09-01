@@ -52,7 +52,7 @@ window:
   # decorations: transparent
 
   # When true, alacritty starts maximized.
-  start_maximized: true
+  start_maximized: false
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -144,52 +144,68 @@ persistent_logging: true
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night Bright)
+# Default colors
 colors:
-  # Default colors
   primary:
     background: '0x101818'
     foreground: '0xeaeaea'
-
-    # Bright and dim foreground colors
-    #
-    # The dimmed foreground color is calculated automatically if it is not present.
-    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-    # is `false`, the normal foreground color will be used.
-    #dim_foreground: '0x9a9a9a'
     bright_foreground: '0xffffff'
 
-  # Cursor colors
-  #
-  # Colors which should be used to draw the terminal cursor. If these are unset,
-  # the cursor color will be the inverse of the cell color.
+  # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: '0xE6E1C4'
     cursor: '0x993F0B'
-    # cursor: '0xB04100'
 
   # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0x990000'
-    green:   '0xb9ca4a'
-    yellow:  '0x999900'
-    blue:    '0x7aa6da'
-    magenta: '0xc397d8'
-    cyan:    '0x00A6B2'
-    white:   '0xE5E5E5'
+    black:   '0x263238'
+    red:     '0xec5f67'
+    green:   '0x00A600'
+    yellow:  '0xffcc00'
+    blue:    '0x89ddff'
+    magenta: '0x82aaff'
+    cyan:    '0x80cbc4'
+    white:   '0xcdd3de'
 
   # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xE50000'
+    black:   '0x707880'
+    red:     '0xec5f67'
     green:   '0x00D900'
-    yellow:  '0xE5E500'
-    blue:    '0x0000FF'
-    magenta: '0xE500E5'
-    cyan:    '0x54ced6'
-    white:   '0xE5E5E5'
+    yellow:  '0xffcc00'
+    blue:    '0x89ddff'
+    magenta: '0x82aaff'
+    cyan:    '0x80cbc4'
+    white:   '0xffffff'
 
+  indexed_colors:
+    - { index: 16, color: '0xea9560' }
+    - { index: 17, color: '0xec5f67' }
+    - { index: 18, color: '0x2c393f' }
+    - { index: 19, color: '0x37474f' }
+    - { index: 20, color: '0xc9ccd3' }
+    - { index: 21, color: '0xd5dbe5' }
+  # Normal colors
+  # normal:
+  #   black:   '0x000000'
+  #   red:     '0x990000'
+  #   green:   '0x00a600'
+  #   yellow:  '0x999900'
+  #   blue:    '0x53BDFA'
+  #   magenta: '0xb200b2'
+  #   cyan:    '0x00a6b2'
+  #   white:   '0xbfbfbf'
+
+  # # Bright colors
+  # bright:
+  #   black:   '0x666666'
+  #   red:     '0xe50000'
+  #   green:   '0x00d900'
+  #   yellow:  '0xe5e500'
+  #   blue:    '0x0000ff'
+  #   magenta: '0xe500e5'
+  #   cyan:    '0x00e5e5'
+  #   white:   '0xe5e5e5'
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
