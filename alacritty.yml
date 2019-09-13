@@ -6,13 +6,13 @@
 
 # Any items in the `env` entry below will be added as environment variables. Some entries may override variables
 # set by alacritty itself.
-env: # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use 'alacritty' if it is
-  # available, otherwise 'xterm-256color' is used.
-  TERM: xterm-256color
+# env: # TERM variable
+#   #
+#   # This value is used to set the `$TERM` environment variable for
+#   # each instance of Alacritty. If it is not present, alacritty will
+#   # check the local terminfo database and use 'alacritty' if it is
+#   # available, otherwise 'xterm-256color' is used.
+#   TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -52,7 +52,7 @@ window:
   # decorations: transparent
 
   # When true, alacritty starts maximized.
-  start_maximized: false
+  startup_mode: Fullscreen
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -136,10 +136,10 @@ font:
   use_thin_strokes: false
 
 # Display the time it takes to redraw each frame.
-render_timer: false
+# render_timer: false
 
 # Keep the log file after quitting Alacritty.
-persistent_logging: true
+# persistent_logging: true
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -593,7 +593,7 @@ key_bindings:
   - { key: Backslash, mods: Alt,       chars: "\x1b\\"                      } # Alt + \
   - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                       } # Alt + |
   - { key: N,         mods: Command,   command: { program: "open", args: ["-n", "/Applications/Alacritty.app"] } }
-  - { key: W,        mods: Command, command: { program: "/usr/local/bin/tmux", args: ["kill-window"] } }
+  # - { key: W,        mods: Command, command: { program: "/usr/local/bin/tmux", args: ["kill-window"] } }
   - { key: T,        mods: Command, command: { program: "/usr/local/bin/tmux", args: ["new-window"] } }
   - { key: Key1, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t", "1"] } }
   - { key: Key2, mods: Command, command: { program: "/usr/local/bin/tmux", args: ["select-window", "-t", "2"] } }
