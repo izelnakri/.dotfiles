@@ -1,3 +1,5 @@
+# NOTE: make fzf like suggestions
+# NOTE: make ^F complete the suggestion
 PATH="$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.deno/bin:/usr/local/bin:/usr/sbin:$PATH" # TODO: add asdf
 
 if [ -z "$TMUX" ]; then
@@ -11,14 +13,15 @@ function parse_git_branch {
 }
 
 setopt PROMPT_SUBST
+
 PROMPT='%B%{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$(parse_git_branch) %{$reset_color%}'
 
 LC_ALL=en_US.UTF-8
 LANG=en_US.UTF-8
 EDITOR="nvim"
 HISTTIMEFORMAT="%d/%m/%y %T "
-HISTSIZE=10000
-SAVEHIST=10000
+# Append to history instead of overwriting
+# SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 POSTGRES_USER="postgres"
 POSTGRES_PASSWORD="postgres"
@@ -29,6 +32,11 @@ PGPASSWORD=$POSTGRES_PASSWORD
 PGHOST=$POSTGRES_HOST
 PGPORT=$POSTGRES_PORT
 FZF_DEFAULT_COMMAND='fd --type f'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# Unlimited history
+export HISTFILESIZE=
+export HISTSIZE=
 
 alias onport="ps aux | grep"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -40,6 +48,7 @@ alias server="mix phoenix.server"
 alias terminate="lsof -ti:4200 | xargs kill"
 alias k="kubectl"
 alias kube="kubectl"
+alias ls='ls -G'
 
 # As in "delpod defualt"
 # As in "delpod <namespace>"
@@ -126,8 +135,21 @@ bindkey -s '^o' 'lfcd\n'
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+# Packages
+source <(antibody init)
+antibody bundle zsh-users/zsh-syntax-highlighting
+antibody bundle zsh-users/zsh-autosuggestions
+antibody bundle zsh-users/zsh-history-substring-search
+antibody bundle zsh-users/zsh-syntax-highlighting
+antibody bundle robbyrussell/oh-my-zsh path:plugins/encode64
+antibody bundle robbyrussell/oh-my-zsh path:plugins/git
 
-# Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# Bind up and down arrows to history substring search
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
 
-# set -g fish_user_paths "/usr/local/opt/postgresql@10/bin" $fish_user_paths
+bindkey '^N' history-search-forward
+bindkey '^P' history-search-backward
+
+# fzf
+[ -f ~/.dotfiles/fzf.zsh ] && source ~/.dotfiles/fzf.zsh
