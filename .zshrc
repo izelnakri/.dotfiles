@@ -48,7 +48,8 @@ alias server="mix phoenix.server"
 alias terminate="lsof -ti:4200 | xargs kill"
 alias k="kubectl"
 alias kube="kubectl"
-alias ls='ls -G'
+alias ls='lsd'
+alias find='fd'
 
 # As in "delpod defualt"
 # As in "delpod <namespace>"

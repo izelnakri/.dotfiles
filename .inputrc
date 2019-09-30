@@ -15,4 +15,7 @@ $if mode=vi
   # these are for vi-insert mode
   Control-l: clear-screen
   Control-a: beginning-of-line
+
+  Control-P: history-search-backward
+  Control-N: history-search-forward
 $endif
