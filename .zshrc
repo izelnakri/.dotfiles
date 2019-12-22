@@ -12,7 +12,9 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ ->\ \1/'
 }
 
+unsetopt INC_APPEND_HISTORY # Write to the history file immediately, not when the shell exits.
 setopt PROMPT_SUBST
+setopt SHARE_HISTORY # Share history between all sessions.
 
 PROMPT='%B%{$fg[green]%}%n %{$fg[blue]%}%~%{$fg[yellow]%}$(parse_git_branch) %{$reset_color%}'
 
@@ -20,9 +22,9 @@ LC_ALL=en_US.UTF-8
 LANG=en_US.UTF-8
 EDITOR="nvim"
 HISTTIMEFORMAT="%d/%m/%y %T "
-# Append to history instead of overwriting
-# SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
+HISTSIZE=10000000
+SAVEHIST=10000000
 POSTGRES_USER="postgres"
 POSTGRES_PASSWORD="postgres"
 POSTGRES_HOST="localhost"
@@ -34,9 +36,6 @@ PGPORT=$POSTGRES_PORT
 FZF_DEFAULT_COMMAND='fd --type f'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-# Unlimited history
-export HISTFILESIZE=
-export HISTSIZE=
 
 alias onport="ps aux | grep"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -50,6 +49,8 @@ alias k="kubectl"
 alias kube="kubectl"
 alias ls='lsd'
 alias find='fd'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # As in "delpod defualt"
 # As in "delpod <namespace>"
@@ -154,3 +155,8 @@ bindkey '^P' history-search-backward
 
 # fzf
 [ -f ~/.dotfiles/fzf.zsh ] && source ~/.dotfiles/fzf.zsh
+
+export VOLTA_HOME="$HOME/.volta"
+[ -s "$VOLTA_HOME/load.sh" ] && . "$VOLTA_HOME/load.sh"
+
+export PATH="$VOLTA_HOME/bin:$PATH"
