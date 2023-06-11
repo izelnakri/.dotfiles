@@ -58,5 +58,4 @@ set -g status-left "$tm_session_name"
 tm_battery="#[fg=$base0B,bg=$base00] #(~/.dotfiles/battery-indicator.sh)"
 tm_date="#[fg=$base0F,bg=$base00] %a %d, %m.%y %R"
 tm_host="#[fg=$base0D,bg=$base00] #h "
-set -g status-right "$tm_battery $tm_date $tm_host"
-
+set -g status-right "$tm_date $tm_host $tm_battery"
