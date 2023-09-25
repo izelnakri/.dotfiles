@@ -1,6 +1,8 @@
 # NOTE: make fzf like suggestions
 # NOTE: make ^F complete the suggestion
-# lsof -i:8080 -r 2 # repeat every 2 seconds
+# lsof -i:8080
+PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.deno/bin:$HOME/.local/bin:/usr/local/bin:/usr/sbin:$PATH" # TODO: add asdf
+
 if [ -z "$TMUX" ]; then
   tmux -u attach
 fi
@@ -44,6 +46,10 @@ PGPORT=$POSTGRES_PORT
 FZF_DEFAULT_COMMAND='fd --type f'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+export MANPAGER="bat -l man -p"
+
+
+alias open="xdg-open"
 alias onport="ps aux | grep"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias vim=nvim
@@ -52,12 +58,13 @@ alias v=nvim
 alias emacs="emacs -nw"
 alias e="helix"
 alias dockerremoveall="sudo docker system prune -a"
-alias checkmostmodifiedfiles="git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
+alias checkrepo="git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
 alias server="mix phoenix.server"
 alias terminate="lsof -ti:4200 | xargs kill"
 alias k="kubectl"
 alias d="sudo docker"
 alias kube="kubectl"
+alias ls="ls --color=auto -F"
 alias lusd="node /home/izelnakri/cron-jobs/curve-lusd.js"
 alias todo="nvim ~/Dropbox/TODO.md"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
@@ -73,6 +80,9 @@ alias x="npx"
 alias bitbox-bridge="/opt/bitbox-bridge/bin/bitbox-bridge"
 # FIND_AND_REPLACE fd . $folderName/. -exec sed 's/SEARCH_STR/REPLACE_STR/g' -i
 alias housing="nvim ~/Dropbox/HOUSING.md"
+alias findpi="nmap -sn 10.251.234.100/24"
+alias scitutor="sc /usr/share/doc/sc/tutorial.sc"
+alias home-manager-docs="chromium ~/Desktop/gifs/home-manager.html"
 
 function cheat {
   curl cheat.sh/$argv
@@ -88,6 +98,18 @@ function delpod {
 function fuck {
   kubectl delete all --all -n $argv
 }
+
+# # bind  ^k history-search-forward
+# # bind  ^j history-search-backward
+# function fish_user_key_bindings
+#     fish_vi_mode
+#     bind -M insert \cf accept-autosuggestion
+#     bind \cf accept-autosuggestion
+#     for mode in insert default visual
+#       bind -M $mode \cp 'up-or-search'
+#       bind -M $mode \cn 'down-or-search'
+#     end
+# end
 
 # wg-quick down man-quick
 # wg-quick up man-quick
@@ -126,7 +148,6 @@ function zle-keymap-select {
     echo -ne '\e[5 q'
   fi
 }
-
 zle -N zle-keymap-select
 zle-line-init() {
     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
@@ -268,5 +289,44 @@ ex=🎯:\
 # Bun
 export BUN_INSTALL="/home/izelnakri/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+unset NIX_PATH
 
 eval "$(direnv hook zsh)"
+
+ix() {
+    local opts
+    local OPTIND
+    [ -f "$HOME/.netrc" ] && opts='-n'
+    while getopts ":hd:i:n:" x; do
+        case $x in
+            h) echo "ix [-d ID] [-i ID] [-n N] [opts]"; return;;
+            d) $echo curl $opts -X DELETE ix.io/$OPTARG; return;;
+            i) opts="$opts -X PUT"; local id="$OPTARG";;
+            n) opts="$opts -F read:1=$OPTARG";;
+        esac
+    done
+    shift $(($OPTIND - 1))
+    [ -t 0 ] && {
+        local filename="$1"
+        shift
+        [ "$filename" ] && {
+            curl $opts -F f:1=@"$filename" $* ix.io/$id
+            return
+        }
+        echo "^C to cancel, ^D to send."
+    }
+    curl $opts -F f:1='<-' $* ix.io/$id
+}
+
+extract() {
+    case "$1" in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjf "$1";;
+        *.tar.gz|*.tgz) tar xzf "$1";;
+        *.tar.xz|*.txz) tar xJf "$1";;
+        *.zip) unzip "$1";;
+        *.rar) unrar x "$1";;
+        *.7z) 7z x "$1";;
+    esac
+}
+
+# eval $(dircolors ~/.nix-profile/share/LS_COLORS)
