@@ -4,6 +4,7 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 env:
+  WINIT_HIDPI_FACTOR: '2'
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -13,6 +14,10 @@ env:
   TERM: xterm-256color
 
 window:
+  opacity: 1
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -34,11 +39,15 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
+    # x: 2
+    # y: 2
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
+  # decorations: none
+
 
   # Window decorations
   #
@@ -66,7 +75,7 @@ window:
   #title: Alacritty
 
   # Window class (Linux only):
-  #class: Alacritty
+  class: Alacritty
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -84,10 +93,10 @@ scrolling:
   # to allow mouse scrolling for applications like `man`.
   #
   # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
+  # faux_multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: true
+  # auto_scroll: true
 
 # Spaces per Tab (changes require restart)
 #
@@ -96,23 +105,13 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 8
+# tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
   # Normal (roman) font face
   normal:
-    family: MesloLGLDZ Nerd Font
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux) monospace
-    #   - (Windows) Consolas
-    #family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    #style: Regular
+    family: "MesloLGLDZ Nerd Font"
 
   # Bold font face
   bold:
@@ -120,30 +119,22 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: MesloLGLDZ Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
+    family: "MesloLGLDZ Nerd Font"
+    style: Bold
 
   # Italic font face
   italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: MesloLGLDZ Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    #style: Italic
+    family: "MesloLGLDZ Nerd Font"
+    style: Bold
 
   # Point size
-  size: 6.5
+  size: 13 # 8.5 # 6.5 prev
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
-    y: 3
+    y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -166,7 +157,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: false
+  # use_thin_strokes: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -277,16 +268,8 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
-  animation: EaseOutExpo
-  duration: 0
-  color: '0xffffff'
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
+# visual_bell:
+  # color: '0xffffff'
 
 # Mouse bindings
 #
@@ -318,27 +301,27 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
 
-  url:
-    # URL launcher
-    #
-    # This program is executed when clicking on a text which is recognized as a URL.
-    # The URL is always added to the command as the last parameter.
-    #
-    # When set to `None`, URL launching will be disabled completely.
-    #
-    # Default:
-    #   - (macOS) open
-    #   - (Linux) xdg-open
-    #   - (Windows) explorer
-    #launcher:
-    #  program: xdg-open
-    #  args: []
+  # url:
+  #   # URL launcher
+  #   #
+  #   # This program is executed when clicking on a text which is recognized as a URL.
+  #   # The URL is always added to the command as the last parameter.
+  #   #
+  #   # When set to `None`, URL launching will be disabled completely.
+  #   #
+  #   # Default:
+  #   #   - (macOS) open
+  #   #   - (Linux) xdg-open
+  #   #   - (Windows) explorer
+  #   #launcher:
+  #   #  program: xdg-open
+  #   #  args: []
 
-    # URL modifiers
-    #
-    # These are the modifiers that need to be held down for opening URLs when clicking
-    # on them. The available modifiers are documented in the key binding section.
-    modifiers: None
+  #   # URL modifiers
+  #   #
+  #   # These are the modifiers that need to be held down for opening URLs when clicking
+  #   # on them. The available modifiers are documented in the key binding section.
+  #   modifiers: None
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
@@ -346,8 +329,6 @@ selection:
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
 
-# Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
 
 cursor:
   # Cursor style
@@ -378,8 +359,6 @@ shell:
   program: tmux
   args:
     - a
-#  args:
-#    - --login
 
 # Startup directory
 #
@@ -397,9 +376,6 @@ working_directory: None
 # Alacritty will fall back to the WinPTY automatically if the ConPTY
 # backend cannot be initialized.
 enable_experimental_conpty_backend: false
-
-# Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
 
 debug:
   # Display the time it takes to redraw each frame.
@@ -521,29 +497,29 @@ key_bindings:
   - { key: Paste,                    action: Paste                            }
   - { key: V,         mods: Control, action: Paste }
   - { key: Copy,                     action: Copy                             }
-  - { key: N,         mods: Alt,   command: { program: "allacritty", args: [] } }
-  - { key: W,        mods: Alt, command: { program: "/usr/sbin/tmux", args: ["kill-window"] } }
-  - { key: T,        mods: Alt, command: { program: "/usr/sbin/tmux", args: ["new-window"] } }
-  - { key: Key1, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "1"] } }
-  - { key: Key2, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "2"] } }
-  - { key: Key3, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "3"] } }
-  - { key: Key4, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "4"] } }
-  - { key: Key5, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "5"] } }
-  - { key: Key6, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "6"] } }
-  - { key: Key7, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "7"] } }
-  - { key: Key8, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "8"] } }
-  - { key: Key9, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t", "9"] } }
-  - { key: LBracket, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t:-"] } }
-  - { key: RBracket, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-window", "-t:+"] } }
-  - { key: H, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-pane", "-L"] } }
-  - { key: J, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-pane", "-D"] } }
-  - { key: K, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-pane", "-U"] } }
-  - { key: L, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["select-pane", "-R"] } }
-  - { key: Y, mods: Alt, command: { program: "/usr/sbin/tmux", args: ["setw", "synchronize-panes"] } }
+  - { key: N,         mods: Alt,   command: { program: "alacritty", args: [] } }
+  - { key: W,        mods: Alt, command: { program: "tmux", args: ["kill-window"] } }
+  - { key: T,        mods: Alt, command: { program: "tmux", args: ["new-window"] } }
+  # - { key: P,        mods: Alt, command: { program: "tmux", args: ["kill-pane"] } }
+  - { key: Key1, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "1"] } }
+  - { key: Key2, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "2"] } }
+  - { key: Key3, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "3"] } }
+  - { key: Key4, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "4"] } }
+  - { key: Key5, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "5"] } }
+  - { key: Key6, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "6"] } }
+  - { key: Key7, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "7"] } }
+  - { key: Key8, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "8"] } }
+  - { key: Key9, mods: Alt, command: { program: "tmux", args: ["select-window", "-t", "9"] } }
+  - { key: LBracket, mods: Alt, command: { program: "tmux", args: ["select-window", "-t:-"] } }
+  - { key: RBracket, mods: Alt, command: { program: "tmux", args: ["select-window", "-t:+"] } }
+  - { key: H, mods: Alt, command: { program: "tmux", args: ["select-pane", "-L"] } }
+  - { key: J, mods: Alt, command: { program: "tmux", args: ["select-pane", "-D"] } }
+  - { key: K, mods: Alt, command: { program: "tmux", args: ["select-pane", "-U"] } }
+  - { key: L, mods: Alt, command: { program: "tmux", args: ["select-pane", "-R"] } }
+  - { key: Y, mods: Alt, command: { program: "tmux", args: ["setw", "synchronize-panes"] } }
   - { key: Z, mods: Alt, chars: "\x01z" }
   - { key: F, mods: Control, chars: "\x1bOC" }
   - { key: PageDown, chars: "\x1bOC" }
   - { key: PageUp, chars: "\x1bOD" }
   - { key: LBracket, mods: Control, chars: "\x01[" }
   # - { key: K, mods: Control, action: ClearHistory }
-
